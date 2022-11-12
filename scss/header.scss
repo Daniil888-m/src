@@ -1,0 +1,278 @@
+//====================================================================================================
+
+//====================================================================================================
+
+//Burger
+
+.icon-menu {
+	display: none;
+	@media (max-width: $mobile) {
+		display: block;
+		position: relative;
+		width: rem(30);
+		height: rem(18);
+		cursor: pointer;
+		z-index: 5;
+		span,
+		&::before,
+		&::after {
+			content: "";
+			transition: all 0.3s ease 0s;
+			right: 0;
+			position: absolute;
+			width: 100%;
+			height: rem(2);
+			background-color: white;
+		}
+		&::before {
+			top: 0;
+		}
+		&::after {
+			bottom: 0;
+		}
+		span {
+			top: calc(50% - rem(1));
+		}
+		.menu-open & {
+			span {
+				width: 0;
+			}
+			&::before,
+			&::after {
+			}
+			&::before {
+				top: calc(50% - rem(1));
+				transform: rotate(-45deg);
+			}
+			&::after {
+				bottom: calc(50% - rem(1));
+				transform: rotate(45deg);
+			}
+		}
+	}
+}
+
+// HEADER  ========================================================================================================================================================
+.header {
+	position: absolute;
+
+	// .header__container
+
+	&__container {
+		z-index: 20;
+		box-sizing: border-box;
+		padding-right: 0;
+		display: block;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		background-color: $black;
+		box-shadow: 0px 5px 22px rgba(0, 0, 0, 0.25);
+		display: flex;
+
+		@media (min-width: $tablet) {
+			padding-left: rem(300);
+		}
+	}
+
+	// .header__wrapper
+
+	&__wrapper {
+		display: flex;
+		justify-content: space-between;
+		flex: 0 0 100%;
+
+		align-items: center;
+	}
+
+	// .header__left
+
+	&__left {
+	}
+
+	// .header__right
+
+	&__right {
+	}
+}
+.left-header {
+	// .left-header__list
+
+	&__list {
+		display: flex;
+		align-items: center;
+
+		@media (max-width: $mobile) {
+			flex-direction: column;
+			width: 100%;
+			gap: 15px;
+		}
+	}
+
+	@media (max-width: $mobile) {
+		position: fixed;
+		top: 0;
+		left: -150%;
+		width: 100vw;
+		height: 100vh;
+		transition: all 0.2s ease 0s;
+		background-color: #181818;
+		display: flex;
+		flex-direction: column;
+
+		justify-content: center;
+		align-items: center;
+		.menu-open & {
+			left: 0;
+		}
+	}
+}
+.list-header {
+	// .list-header__item
+
+	&__item {
+		position: relative;
+		&_menu .list-header__link {
+			display: flex;
+			gap: 13px;
+			align-items: center;
+		}
+
+		&_menu._active .list-header__sub-list {
+			opacity: 1;
+			visibility: visible;
+			pointer-events: auto;
+			display: flex;
+
+			@media (max-width: $mobile) {
+			}
+		}
+		&._active {
+			@media (min-width: $mobile) {
+				background: #3137c9;
+			}
+		}
+	}
+
+	// .list-header__link
+
+	&__link {
+		padding: 14px 15px;
+		color: inherit;
+		font-weight: 400;
+		font-size: rem(12);
+
+		text-transform: uppercase;
+		display: inline-block;
+		transition: all 0.1s ease 0s;
+
+		@media (max-width: $mobile) {
+			@media (any-hover: hover) {
+				&:hover {
+					background: #3137c9;
+				}
+			}
+		}
+
+		@media (max-width: $mobile) {
+			font-size: rem(24);
+		}
+	}
+
+	// .list-header__sub-list
+
+	&__sub-list {
+		background: #3137c9;
+		width: 165px;
+		pointer-events: none;
+
+		display: flex;
+		flex-direction: column;
+		padding-top: rem(10);
+		padding-bottom: rem(10);
+		gap: 1px;
+		align-items: stretch;
+		transition: all 0.2s ease 0s;
+		position: absolute;
+
+		display: none;
+		top: 100%;
+		left: 0;
+		opacity: 0;
+		visibility: hidden;
+		@media (max-width: $mobile) {
+			position: static;
+			background-color: transparent;
+		}
+	}
+
+	// .list-header__sub-item
+
+	&__sub-item {
+		width: 100%;
+	}
+
+	// .list-header__sub-link
+
+	&__sub-link {
+		font-family: "Roboto";
+		font-style: normal;
+		font-weight: 400;
+		font-size: 12px;
+		color: #ffffff;
+		padding: 8px 12px;
+		display: block;
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: darken(#3137c9, 10%);
+			}
+		}
+	}
+}
+
+.right-header {
+	display: flex;
+	gap: 15px;
+	// .right-header__link
+
+	&__link {
+		padding: 14px 15px;
+		transition: all 0.1s ease 0s;
+		text-transform: uppercase;
+		font-size: rem(12);
+		@media (any-hover: hover) {
+			&:hover {
+				background: #3137c9;
+			}
+		}
+	}
+
+	// .right-header__form
+
+	&__form {
+		display: flex;
+		align-items: stretch;
+	}
+
+	// .right-header__form-search
+
+	&__form-search {
+		input {
+			display: block;
+			height: 100%;
+			font-family: "Roboto";
+			font-style: normal;
+			font-weight: 400;
+			font-size: 12px;
+			background-color: $gray;
+			padding: 10px 20px;
+			color: rgba(255, 255, 255, 0.4);
+			outline: none;
+
+			&._form-focus {
+				color: white;
+			}
+		}
+	}
+}

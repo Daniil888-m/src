@@ -1,0 +1,331 @@
+@use "sass:math";
+
+// Подключение миксинов ===========================================================================================================================================================================================================================================================================
+@import "base/mixins";
+@import "vars";
+
+// Подключение шрифтов ===========================================================================================================================================================================================================================================================================
+//&display=swap - добавить при подключении через плагин
+
+// Подключить если есть локальные файлы шрифтов
+//@import "fonts/fonts";
+@import url(https://fonts.googleapis.com/css?family=Lato:regular&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300regular,500,700&display=swap);
+
+// Подключение иконочных шрифтов ==============================================================================================================================================================================================================================================================================
+// Подключить если есть файл иконочного шрифта
+//@import "fonts/icons";
+
+// Шрифт по умолчанию ==============================================================================================================================================================================================================================================================================
+$fontFamily: "";
+$fontSize: rem(14); // где 14(px) - размер шрифта по умолчанию из макета
+
+// Основные цвета
+$mainColor: #000; // Цвет шрифта по умолчанию
+
+// НАСТРОЙКИ ===============================================================================================================================================================================================================================================================================================
+// Минимальная ширина страницы
+$minWidth: 320;
+// Ширина полотна (макета)
+$maxWidth: 1920;
+// Ширина ограничивающего контейнера (0 = нет ограничения)
+$maxWidthContainer: 1000;
+// Общий отступ у контейнера
+// (30 = по 15px слева и справа, 0 = нет отступа)
+$containerPadding: 30;
+
+// Ширина срабатывания первого брейкпоинта
+$containerWidth: $maxWidthContainer + $containerPadding;
+
+// Брейк-поинты
+$pc: em($containerWidth); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$tablet: em(991.98); // Планшеты, некоторые телефоны в горизонтальном положении
+$mobile: em(767.98); // Телефоны L
+$mobileSmall: em(479.98); // Телефоны S
+
+// Тип адаптива:
+// 1 = отзывчивость (у контейнера нет брейкпоинтов),
+// 2 = по брейк-поинтам (контейнер меняет свою ширину по брейк-поинтам)
+$responsiveType: 1;
+
+// Обнуление и общие параметры ============================================================================================================================================================================================== =============================================================================================== ===============================================================================================
+@import "base/null";
+
+body {
+	color: white;
+	font-size: rem(14);
+	font-family: "Roboto";
+	font-weight: 400;
+	background-color: #181818;
+
+	// Скролл заблокирован
+	.lock & {
+		overflow: hidden;
+		touch-action: none;
+	}
+	// Сайт загружен
+	.loaded & {
+	}
+}
+// Оболочка ============================================================================================================================================================================================================================================================================================================================================================================================================================================
+.wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	// Прижимаем footer
+	> main {
+		flex: 1 1 auto;
+	}
+	// Фикс для слайдеров
+	> * {
+		min-width: 0;
+	}
+}
+// Ограничивающий контейнер ======================================================================================================================================================================================================================
+
+/*
+(i) Стили будут применяться ко 
+всем классам содержащим *__container
+Например header__container, main__container и т.д.
+Снипет (HTML): cnt
+*/
+@if ($responsiveType==1) {
+	// Отзывчивая
+	[class*="__container"] {
+		@if ($maxWidthContainer>0) {
+			max-width: rem($maxWidthContainer);
+			box-sizing: content-box;
+			margin: 0 auto;
+		}
+		@if ($containerPadding>0) {
+			padding: 0 rem(math.div($containerPadding, 2));
+		}
+	}
+} @else {
+	// По брейк-поинтам
+	[class*="__container"] {
+		margin: 0 auto;
+		@if ($maxWidthContainer>0) {
+			max-width: rem($maxWidthContainer);
+			box-sizing: content-box;
+		} @else {
+			@if ($containerPadding>0) {
+				padding: 0 rem(math.div($containerPadding, 2));
+			}
+		}
+		@media (max-width: $pc) {
+			max-width: rem(970);
+		}
+		@media (max-width: $tablet) {
+			max-width: rem(750);
+		}
+		@media (max-width: $mobile) {
+			max-width: none;
+			@if ($containerPadding>0 and $maxWidthContainer>0) {
+				padding: 0 rem(math.div($containerPadding, 2));
+			}
+		}
+	}
+}
+
+img {
+	max-width: 100%;
+}
+
+// Подключение базовых стилей, шаблонов (заготовок) и вспомогательных  классов
+// Для подключения/отключения конкретных стилей смотри base.scss
+@import "base";
+
+// Подключение стилей общих элементов проекта
+@import "common";
+
+// Подключение стилей отдельных блоков
+@import "header";
+@import "footer";
+
+// Подключение стилей отдельных страниц
+@import "home";
+
+// SIDEBAR  ========================================================================================================================================================
+
+.page {
+	// .page__sidebar
+
+	&__sidebar {
+	}
+
+	&__body {
+	}
+
+	&__container {
+		display: flex;
+
+		@media (max-width: $tablet) {
+			flex-direction: column;
+			padding: 0 20px;
+		}
+	}
+
+	@media (min-width: $mobile) {
+		&__body {
+			flex: 1 1 auto;
+		}
+	}
+}
+.sidebar {
+	@media (min-width: $tablet) {
+		flex: 0 0 300px;
+		margin-top: rem(0);
+	}
+	margin-top: 80px;
+
+	background-color: $gray;
+	// .sidebar__container
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		align-items: center;
+
+		@media (max-width: $tablet) {
+			flex-direction: row;
+			justify-content: space-evenly;
+
+			padding: 20px 0;
+		}
+
+		@media (max-width: $mobile) {
+			flex-direction: column;
+		}
+	}
+
+	&__img {
+		@media (min-width: $tablet) {
+			margin: 0 -20px;
+			max-width: 150%;
+		}
+
+		@media (max-width: $tablet) {
+			display: none;
+		}
+	}
+	// .sidebar__top
+
+	&__top {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		margin-bottom: rem(30);
+	}
+
+	// .sidebar__logo
+
+	&__logo {
+		width: 100px;
+		height: 100px;
+		border: 2px solid #ffffff;
+		box-shadow: 0px 7px 20px rgba(0, 0, 0, 0.25);
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: rem(20);
+
+		overflow: hidden;
+	}
+
+	// .sidebar__name
+
+	&__name {
+		font-size: rem(18);
+		line-height: math.div(21, 18);
+		text-align: center;
+
+		color: #ffffff;
+		margin-bottom: rem(3);
+	}
+
+	// .sidebar__text
+
+	&__text {
+		font-weight: 300;
+		font-size: rem(14);
+		line-height: rem(16);
+		text-align: center;
+
+		color: #dedede;
+		margin-bottom: rem(17);
+	}
+
+	// .sidebar__socials
+
+	&__socials {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 15px;
+
+		img {
+			width: 25px;
+			height: 25px;
+			cursor: pointer;
+		}
+	}
+
+	// .sidebar__bottom
+
+	&__bottom {
+	}
+}
+.sidebar-bottom {
+	@media (max-width: $tablet) {
+		max-width: 400px;
+	}
+
+	@media (max-width: $tablet) {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+	}
+	// .sidebar-bottom__text
+
+	&__text {
+		font-size: 12px;
+		line-height: 18px;
+		/* or 150% */
+
+		text-align: center;
+
+		border-top: 1px solid #1c1c1c;
+		border-bottom: 1px solid #1c1c1c;
+
+		padding-bottom: 30px;
+		padding-top: 30px;
+		margin-bottom: 30px;
+
+		@media (max-width: $tablet) {
+			padding: 5px 0;
+		}
+
+		@media (max-width: $mobile) {
+			font-size: rem(11);
+			padding: 0 10px;
+		}
+	}
+
+	// .sidebar-bottom__buttons
+
+	&__buttons {
+		display: flex;
+		gap: 15px;
+
+		@media (min-width: $tablet) {
+			justify-content: center;
+			align-items: center;
+		}
+	}
+}
