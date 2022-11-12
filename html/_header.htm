@@ -4,12 +4,12 @@
 		<div class="header__wrapper">
 
 			<div class="header__left left-header">
-				<ul class="left-header__list list-header">
+				<ul data-da=".header-menu__bottom, 768,1" class="left-header__list list-header">
 					<li class="list-header__item"><a href="" class="list-header__link">Главная</a></li>
 					<li class="list-header__item list-header__item_menu">
 
-						<a class="list-header__link list-header__link">Статьи <img src="@img/icons/arrow-bottom.svg" alt=""></a>
-						<ul class="list-header__sub-list">
+						<a href="" class="list-header__link list-header__link">Статьи <span><img src="@img/icons/arrow-bottom.svg" alt=""></span></a>
+						<ul class="list-header__sub-list ">
 							<li class="list-header__sub-item"><a href="" class="list-header__sub-link">Создание сайтов</a></li>
 							<li class="list-header__sub-item"><a href="" class="list-header__sub-link">Интернет-маркетинг</a></li>
 							<li class="list-header__sub-item"><a href="" class="list-header__sub-link">Продвижение видео</a></li>
@@ -21,10 +21,16 @@
 				</ul>
 			</div>
 			<button type="button" class="menu__icon icon-menu"><span></span></button>
+			<div class="header-menu">
+				<div class="header-menu__container">
+					<div class="header-menu__top"></div>
+					<div class="header-menu__bottom"></div>
+				</div>
+			</div>
 
 
 			<div class="header__right right-header">
-				<a href="" class="right-header__link">Профиль</a>
+				<a data-da=".left-header__list,480,last" href="" class="right-header__link">Профиль</a>
 				<div class="right-header__form">
 					<form action="" class="right-header__form-search">
 						<input type="text" name="search" placeholder="Поиск по блогу" class="">

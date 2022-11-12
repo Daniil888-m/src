@@ -32,14 +32,14 @@ flsFunctions.addLoadedClass();
 /* Модуль для работы с меню (Бургер) */
 flsFunctions.menuInit();
 /* Учет плавающей панели на мобильных устройствах при 100vh */
-flsFunctions.fullVHfix();
+// flsFunctions.fullVHfix();
 
 /*
 Модуль работы со спойлерами
 Документация: https://template.fls.guru/template-docs/modul-spojlery.html
 Сниппет (HTML): spollers
 */
-flsFunctions.spollers();
+// flsFunctions.spollers();
 
 /*
 Модуль работы с табами
@@ -153,7 +153,7 @@ flsForms.formFieldsInit({ viewPass: false });
 // import './libs/watcher.js'
 
 // Функции работы скроллом
-import * as flsScroll from "./files/scroll/scroll.js";
+// import * as flsScroll from "./files/scroll/scroll.js";
 
 // Плавная навигация по странице
 // Документация: https://template.fls.guru/template-docs/modul-plavnoj-navigacii-po-stranice.html
@@ -161,7 +161,7 @@ import * as flsScroll from "./files/scroll/scroll.js";
 
 // Функционал добавления классов к хедеру при прокрутке
 // Документация: https://template.fls.guru/template-docs/modul-dobavleniya-klassov-k-shapke-pri-prokrutke-stranicy.html
-flsScroll.headerScroll();
+// flsScroll.headerScroll();
 
 // Функционал липкого блока
 // flsScroll.stickyBlock();

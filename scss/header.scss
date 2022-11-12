@@ -11,6 +11,10 @@
 		position: relative;
 		width: rem(30);
 		height: rem(18);
+		position: absolute;
+
+		top: 10px;
+		left: 15px;
 		cursor: pointer;
 		z-index: 5;
 		span,
@@ -18,7 +22,7 @@
 		&::after {
 			content: "";
 			transition: all 0.3s ease 0s;
-			right: 0;
+			left: 0;
 			position: absolute;
 			width: 100%;
 			height: rem(2);
@@ -96,62 +100,118 @@
 	&__right {
 	}
 }
+
+.header-menu {
+	margin-top: 35.5px;
+	@media (max-width: $mobile) {
+		position: fixed;
+
+		top: 0;
+		right: 15px;
+		left: 0;
+		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		background-color: $black;
+		display: flex;
+		justify-content: start;
+		overflow: auto;
+		transform: translate(-150%, 0px);
+		transition: all 0.3s ease 0s;
+		padding-bottom: rem(15);
+
+		.menu-open & {
+			transform: translate(0%, 0px);
+		}
+	}
+
+	// .header-menu__container
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		padding: 0 15px;
+		margin: 0;
+
+		max-width: 400px;
+
+		.sidebar__img {
+			height: 100px;
+		}
+	}
+
+	// .header-menu__top
+
+	&__top {
+		display: flex;
+		justify-content: start;
+		flex-direction: column;
+		align-items: center;
+
+		@media (max-width: $mobile) {
+			align-items: stretch;
+		}
+	}
+
+	// .header-menu__bottom
+
+	&__bottom {
+	}
+}
+
 .left-header {
 	// .left-header__list
 
 	&__list {
 		display: flex;
 		align-items: center;
-
-		@media (max-width: $mobile) {
-			flex-direction: column;
-			width: 100%;
-			gap: 15px;
-		}
 	}
 
 	@media (max-width: $mobile) {
-		position: fixed;
-		top: 0;
-		left: -150%;
-		width: 100vw;
-		height: 100vh;
-		transition: all 0.2s ease 0s;
-		background-color: #181818;
-		display: flex;
 		flex-direction: column;
-
-		justify-content: center;
-		align-items: center;
-		.menu-open & {
-			left: 0;
-		}
 	}
 }
 .list-header {
+	@media (max-width: $mobile) {
+		margin-bottom: 56px;
+		margin-top: 30px;
+	}
 	// .list-header__item
 
 	&__item {
 		position: relative;
 		&_menu .list-header__link {
 			display: flex;
-			gap: 13px;
 			align-items: center;
+
+			span {
+				padding: 10px;
+				margin: -10px;
+				padding-left: 10px;
+				margin-left: 3px;
+				display: flex;
+				justify-content: end;
+				display: none;
+				@media (min-width: $tablet) {
+					flex: 1 1 auto;
+					display: flex;
+				}
+			}
+		}
+
+		&._active {
+			@media (min-width: $mobile) {
+				background: #3137c9;
+			}
 		}
 
 		&_menu._active .list-header__sub-list {
 			opacity: 1;
 			visibility: visible;
-			pointer-events: auto;
-			display: flex;
 
-			@media (max-width: $mobile) {
-			}
-		}
-		&._active {
-			@media (min-width: $mobile) {
-				background: #3137c9;
-			}
+			pointer-events: auto;
+			transition: all 0.1s ease 0s;
 		}
 	}
 
@@ -161,22 +221,37 @@
 		padding: 14px 15px;
 		color: inherit;
 		font-weight: 400;
-		font-size: rem(12);
+		position: relative;
 
 		text-transform: uppercase;
-		display: inline-block;
+		display: flex;
+
 		transition: all 0.1s ease 0s;
+		font-size: rem(12);
+		justify-content: center;
 
 		@media (max-width: $mobile) {
+			font-weight: 300;
+			font-size: 16px;
+			line-height: 19px;
+			text-transform: none;
+			justify-content: start;
+			padding: 10px 15px;
+
+			&:hover {
+				color: #0e70e2;
+				text-decoration: underline;
+			}
+		}
+
+		@media (min-width: $mobile) {
+			justify-content: start;
+
 			@media (any-hover: hover) {
 				&:hover {
 					background: #3137c9;
 				}
 			}
-		}
-
-		@media (max-width: $mobile) {
-			font-size: rem(24);
 		}
 	}
 
@@ -193,17 +268,23 @@
 		padding-bottom: rem(10);
 		gap: 1px;
 		align-items: stretch;
-		transition: all 0.2s ease 0s;
+		transition: all 0.02s ease 0s;
 		position: absolute;
 
-		display: none;
 		top: 100%;
 		left: 0;
+
 		opacity: 0;
 		visibility: hidden;
 		@media (max-width: $mobile) {
+			opacity: 1;
+			visibility: visible;
 			position: static;
+			padding: 0 17px;
+			padding-left: rem(20);
 			background-color: transparent;
+			width: 260px;
+			pointer-events: auto;
 		}
 	}
 
@@ -211,6 +292,20 @@
 
 	&__sub-item {
 		width: 100%;
+
+		@media (max-width: $mobile) {
+			justify-content: start;
+			display: flex;
+		}
+	}
+
+	@media (max-width: $mobile) {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: start;
+
+		padding: 0 15px;
 	}
 
 	// .list-header__sub-link
@@ -219,13 +314,29 @@
 		font-family: "Roboto";
 		font-style: normal;
 		font-weight: 400;
-		font-size: 12px;
 		color: #ffffff;
 		padding: 8px 12px;
 		display: block;
-		@media (any-hover: hover) {
+		font-size: rem(13);
+		transition: all 0.1s ease 0s;
+
+		@media (max-width: $mobile) {
+			font-weight: 300;
+			font-size: 15px;
+			line-height: 32px;
+			text-transform: none;
+			padding: 3px 15px;
 			&:hover {
-				background-color: darken(#3137c9, 10%);
+				color: #0e70e2;
+				text-decoration: underline;
+			}
+		}
+
+		@media (min-width: $tablet) {
+			@media (any-hover: hover) {
+				&:hover {
+					background-color: darken(#3137c9, 10%);
+				}
 			}
 		}
 	}
@@ -241,9 +352,27 @@
 		transition: all 0.1s ease 0s;
 		text-transform: uppercase;
 		font-size: rem(12);
-		@media (any-hover: hover) {
+		transition: all 0.1s ease 0s;
+		@media (min-width: $mobile) {
+			@media (any-hover: hover) {
+				&:hover {
+					background: #3137c9;
+				}
+			}
+		}
+
+		@media (max-width: em(480)) {
+			font-size: rem(24);
+			font-weight: 300;
+			font-size: 16px;
+			line-height: 19px;
+			text-transform: none;
+			justify-content: start;
+			padding: 10px 15px;
+
 			&:hover {
-				background: #3137c9;
+				color: #0e70e2;
+				text-decoration: underline;
 			}
 		}
 	}
@@ -272,6 +401,10 @@
 
 			&._form-focus {
 				color: white;
+			}
+
+			@media (max-width: rem(480)) {
+				width: 212px;
 			}
 		}
 	}
