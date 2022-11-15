@@ -416,7 +416,25 @@ export function menuInit() {
 			if (bodyLockStatus && e.target.closest('.icon-menu')) {
 				bodyLockToggle();
 				document.documentElement.classList.toggle("menu-open");
+
+
+				function fn(e) {
+					console.log(!e.target.closest('.icon-menu') && !e.target.closest('.header-menu'));
+
+					if (!e.target.closest('.icon-menu') && !e.target.closest('.header-menu')) {
+
+						menuClose();
+						console.log('gggg');
+						document.removeEventListener('click', fn);
+
+					}
+
+
+
+				}
+				document.addEventListener('click', fn);
 			}
+
 		});
 	};
 }

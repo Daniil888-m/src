@@ -6,7 +6,7 @@
 
 .icon-menu {
 	display: none;
-	@media (max-width: $mobile) {
+	@media (max-width: rem(768)) {
 		display: block;
 		position: relative;
 		width: rem(30);
@@ -63,31 +63,53 @@
 	// .header__container
 
 	&__container {
-		z-index: 20;
+		z-index: 2;
 		box-sizing: border-box;
 		padding-right: 0;
 		display: block;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		background-color: $black;
-		box-shadow: 0px 5px 22px rgba(0, 0, 0, 0.25);
+
 		display: flex;
+		align-items: center;
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+
+		._scroll {
+			z-index: 20;
+		}
 
 		@media (min-width: $tablet) {
-			padding-left: rem(300);
+			padding-left: rem(317);
+			justify-content: right;
 		}
 	}
 
 	// .header__wrapper
 
 	&__wrapper {
-		display: flex;
 		justify-content: space-between;
-		flex: 0 0 100%;
-
+		width: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		display: flex;
 		align-items: center;
+		display: flex;
+		background-color: $black;
+		min-height: 40px;
+		z-index: 2;
+
+		box-shadow: 0px 5px 22px rgba(0, 0, 0, 0.25);
+		transition: all 0.3s ease 0s;
+
+		@media (min-width: $mobile) {
+			&._scroll {
+				min-height: 50px;
+				background-color: rgba($color: $black, $alpha: 0.9);
+				z-index: 10;
+			}
+		}
 	}
 
 	// .header__left
@@ -103,14 +125,13 @@
 
 .header-menu {
 	margin-top: 35.5px;
-	@media (max-width: $mobile) {
+	@media (max-width: rem(768)) {
 		position: fixed;
 
-		top: 0;
+		top: 4.5px;
 		right: 15px;
 		left: 0;
 		bottom: 0;
-		display: flex;
 		flex-direction: column;
 		background-color: $black;
 		display: flex;
@@ -119,6 +140,7 @@
 		transform: translate(-150%, 0px);
 		transition: all 0.3s ease 0s;
 		padding-bottom: rem(15);
+		max-width: 400px;
 
 		.menu-open & {
 			transform: translate(0%, 0px);
@@ -166,6 +188,7 @@
 	&__list {
 		display: flex;
 		align-items: center;
+		flex-wrap: wrap;
 	}
 
 	@media (max-width: $mobile) {
@@ -173,7 +196,7 @@
 	}
 }
 .list-header {
-	@media (max-width: $mobile) {
+	@media (max-width: rem(768)) {
 		margin-bottom: 56px;
 		margin-top: 30px;
 	}
@@ -387,6 +410,7 @@
 	// .right-header__form-search
 
 	&__form-search {
+		min-height: 40px;
 		input {
 			display: block;
 			height: 100%;

@@ -12,7 +12,7 @@ window.mobileCheck = function () {
 	return check;
 };
 
-const headerBody = document.querySelector('.header__container');
+const headerBody = document.querySelector('.header__wrapper');
 
 function documentLoad() {
 
@@ -25,14 +25,13 @@ function documentLoad() {
 		if (document.documentElement.clientWidth > 768 && !document.documentElement.classList.contains('touch')) {
 			currentItem.addEventListener('mouseenter', function name(e) {
 
-				e.preventDefault()
+				e.preventDefault();
 				this.classList.add('_active');
 
 			});
-			console.log('3333');
 
 			currentItem.addEventListener('mouseleave', function name(e) {
-				e.preventDefault()
+				e.preventDefault();
 
 				this.classList.remove('_active');
 
@@ -64,6 +63,7 @@ function documentLoad() {
 				clickArea.addEventListener('click', function (e) {
 					e.preventDefault();
 					currentItem.classList.toggle('_active')
+
 
 				})
 			}
